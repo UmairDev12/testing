@@ -8,11 +8,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: self-hosted
-    name: Build React App
-    # Runner label (your machine name)
-    labels:
-      - project
+    runs-on: [self-hosted, Linux, X64, project]
 
     steps:
       - name: Checkout repository
