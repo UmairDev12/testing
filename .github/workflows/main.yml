@@ -1,0 +1,38 @@
+name: React CI/CD
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+    name: Build React App
+    # Runner label (your machine name)
+    labels:
+      - project
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Use Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+
+      - name: Install Dependencies
+        run: |
+          npm install
+
+      - name: Build React App
+        run: |
+          npm run start
+
+      - name: Deploy Build (copy build folder to server path)
+        run: |
+          # Example deployment: adjust to your server path
+          rm -rf /var/www/html/*
+          cp -r build/* /var/www/html/
