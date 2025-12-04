@@ -8,7 +8,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: [self-hosted, Linux, X64, project]
+    runs-on: [self-hosted, linux, x64, project]
 
     steps:
       - name: Checkout repository
@@ -20,15 +20,12 @@ jobs:
           node-version: "24"
 
       - name: Install Dependencies
-        run: |
-          npm install
+        run: npm install
 
       - name: Build React App
-        run: |
-          npm run start
+        run: npm run build
 
-      - name: Deploy Build (copy build folder to server path)
+      - name: Deploy Build
         run: |
-          # Example deployment: adjust to your server path
           rm -rf /var/www/html/*
           cp -r build/* /var/www/html/
